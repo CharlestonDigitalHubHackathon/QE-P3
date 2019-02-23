@@ -1,4 +1,4 @@
-const db = require('./clients/airtable')
+const db = require('../clients/airtable')
 const { find } = require('ramda')
 
 module.exports = {
