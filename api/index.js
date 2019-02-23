@@ -4,6 +4,7 @@ const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const PORT = process.env.PORT || 8080
 const app = express()
 const { createStudent, startConversation} = require('./lib/actions')
+const { getOtherNumber} = require('./lib/queries')
 const {sendInitialConvo, passAlong} = require('./lib/processTutorRequest')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
@@ -18,9 +19,16 @@ app.post('/api/webhook', (req, res) => {
   ) {
     const { Subject, Age } = req.body.queryResult.parameters
     const phoneNumber = req.body.originalDetectIntentRequest.payload.data.To
-    startConversation({student: phoneNumber, tutor: '+12058072847', subject: Subject}).then(responseFromAirTable => {
-      console.log('RESPONSE FROM AIRTABLE >>>> ', responseFromAirTable)
-    })
+
+    startConversation({student: phoneNumber, tutor: '+12058072847', subject: Subject})
+      // console.log('RESPONSE FROM AIRTABLE >>>> ', responseFromAirTable)
+      const convoObj = {
+        to: phoneNumber,
+        subject: Subject
+      }
+    sendInitialConvo(convoObj)
+
+    
     console.log('subject: ', Subject)
     console.log('Age: ', Age)
     console.log('Phone Number: ', phoneNumber)
@@ -34,6 +42,9 @@ app.post('/api/webhook', (req, res) => {
 app.post('/api/twilio/webhook', (req, res) => {
   
   console.log(req.body, Date.now())
+  getOtherNumber(req.body.From).then(resp => {
+    console.log('other number', resp)
+  })
   const resp = new MessagingResponse();
   resp.message('Thanks for saying hi!');
   

@@ -5,13 +5,14 @@
 
 const twilio = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN)
 
-module.export = {
+module.exports = {
     sendInitialConvo,
     passAlong
 }
 
 
 function sendInitialConvo({to, subject }) {
+    console.log('WE ARE IN SENDINITIALCONVO')
     const from = '+18432585008'
     const tutorMSG = `Your tutee has questions about ${subject}, please `
     const tuteeMSG = 'Your tutor will message you shortly.'
@@ -29,11 +30,13 @@ function sendInitialConvo({to, subject }) {
 
     sendMSG(tutorMessage).then(resp => {
         return sendMSG(tuteeMessage)
-    })
+    }).catch(e => console.log(e, 'UGH OHHHHHHHHH, couldnt send message'))
 
 }
 
-function passAlong({to,from, msg})
+function passAlong({to,from, msg}) {
+
+}
 
 function sendMSG({to, from, msg}) {
 
@@ -43,7 +46,7 @@ function sendMSG({to, from, msg}) {
       from,
        to
      })
-    .then(message => console.log(message.sid));
+    .then(message => console.log(message.sid)).catch(e => console.log('oh no something happend and you couldnt send', e))
 
 }
 
