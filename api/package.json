@@ -4,20 +4,28 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "airtable": "^0.5.9",
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "ramda": "^0.26.1",
     "twilio": "^3.28.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
   },
   "now": {
-    "alias": "https://booze.calweb.co"
+    "alias": "https://booze.calweb.co",
+    "env": {
+      "TWILIO_ACCOUNT_SID": "@twilio-sid",
+      "TWILIO_AUTH_TOKEN": "@twilio-token",
+      "AIRTABLE_BASE": "@airtable-base",
+      "AIRTABLE_KEY": "@airtable-key"
+    }
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node_modules/.bin/nodemon index.js",
+    "dev": "node_modules/.bin/nodemon -r dotenv/config index.js",
     "start": "node index.js"
   },
   "author": "",
