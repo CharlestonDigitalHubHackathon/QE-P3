@@ -1,0 +1,25 @@
+{
+  "name": "QE-P3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CharlestonDigitalHubHackathon/QE-P3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CharlestonDigitalHubHackathon/QE-P3/issues"
+  },
+  "homepage": "https://github.com/CharlestonDigitalHubHackathon/QE-P3#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "twilio": "^3.28.1"
+  }
+}
