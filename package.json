@@ -20,6 +20,8 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "twilio": "^3.28.1"
+    "twilio": "^3.28.1",
+    "airtable": "^0.5.9",
+    "dotenv": "^6.2.0"
   }
 }
